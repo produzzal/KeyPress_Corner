@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const MainLayout = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -9,7 +10,7 @@ const MainLayout = () => {
 
   return (
     <div>
-      <nav className="bg-[#262626] dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="bg-[#262626] dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
             href="https://flowbite.com/"
@@ -102,45 +103,45 @@ const MainLayout = () => {
           >
             <ul className="flex flex-col ml-20 md:flex-row p-4 md:p-0 mt-4 md:mt-0 font-medium border border-gray-100 rounded-lg bg-[#262626] md:space-x-8 rtl:space-x-reverse md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="block py-2 px-3 text-white  rounded md:p-0 "
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/products"
                   className="block py-2 px-3 text-white  rounded md:p-0 "
                 >
                   Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/about"
                   className="block py-2 px-3 text-white  rounded md:p-0 "
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/contact"
                   className="block py-2 px-3 text-white  rounded md:p-0 "
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/dashboard"
                   className="block py-2 px-3 text-white  rounded md:p-0 "
                 >
                   Dashboard
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -150,4 +151,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default Navbar;
