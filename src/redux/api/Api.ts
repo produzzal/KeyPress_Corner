@@ -13,9 +13,12 @@ export const baseApi = createApi({
       }),
     }),
     getAllProducts: builder.query({
-      query: () => ({
+      query: (searchTerm = "") => ({
         method: "GET",
         url: "/all-products",
+        params: {
+          searchTerm,
+        },
       }),
     }),
   }),

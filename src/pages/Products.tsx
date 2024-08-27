@@ -1,9 +1,11 @@
 import ProductCard from "@/components/ProductCard";
 import { useGetAllProductsQuery } from "@/redux/api/Api";
 import { TProduct } from "@/types/Product";
+import { useState } from "react";
 
 const Products = () => {
-  const { data, isLoading } = useGetAllProductsQuery({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const { data, isLoading } = useGetAllProductsQuery(searchTerm);
   if (isLoading) {
     return (
       <div role="status" className="flex justify-center items-center">
@@ -28,16 +30,55 @@ const Products = () => {
     );
   }
 
+  const filteredProducts = data?.filter(
+    (product: TProduct) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.brand.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="my-20 mx-2">
-      <h2 className="text-2xl md:text-4xl font-bold mb-5 md:mb-12">
-        Our All Products
-      </h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
-        {data.map((product: TProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
+      <div className="flex justify-between items-center mb-5 md:mb-12">
+        <h2 className="text-2xl md:text-4xl font-bold ">Our All Products</h2>
+        <div className="w-32 md:w-64">
+          <button className="relative w-full md:w-auto block">
+            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none rounded">
+              <svg
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search Products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </button>
+        </div>
       </div>
+      {filteredProducts && filteredProducts.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
+          {filteredProducts.map((product: TProduct) => (
+            <ProductCard key={product?._id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">No products found</div>
+      )}
     </div>
   );
 };
