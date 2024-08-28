@@ -19,7 +19,7 @@ const Service = () => {
     window.open(followUrl, "_blank", "width=600,height=400");
   };
   return (
-    <div>
+    <div className="my-20">
       <div className="grid grid-cols-2 md:grid-cols-4 px-5 md:px-8 py-5 md:py-10 md:w-2/3 mx-auto gap-5 bg-[#262626] rounded">
         <div className="bg-[#bbbaf8] p-5 rounded ">
           <svg

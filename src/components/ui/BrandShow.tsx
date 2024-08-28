@@ -1,4 +1,4 @@
-const BrandShowcase = () => {
+const BrandShow = () => {
   const brands = [
     {
       id: 1,
@@ -19,7 +19,7 @@ const BrandShowcase = () => {
   ];
 
   return (
-    <div className="my-8 ml-1">
+    <div className="my-20">
       <h2 className="text-2xl md:text-4xl font-bold mb-5 md:mb-12">
         Top Featured Keyboard Brands
       </h2>
@@ -42,4 +42,4 @@ const BrandShowcase = () => {
   );
 };
 
-export default BrandShowcase;
+export default BrandShow;
