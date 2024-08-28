@@ -50,7 +50,14 @@ const ProductCard = ({ product }: { product: TProduct }) => {
             </span>
           </p>
         </div>
-        <StarRating rating={product.rating} />
+        <div className="flex items-center">
+          <p className="items-center mb-2 mr-2 text-md md:text-lg font-semibold text-gray-700 dark:text-gray-300">
+            Rating:
+          </p>
+          <div className="text-xl pb-2">
+            <StarRating rating={product.rating} />
+          </div>
+        </div>
         <button
           onClick={handleShowDetails}
           className="mt-4 bg-[#BBBAF8] px-6 py-2 rounded transition-colors hover:bg-[#9c9af6]"
