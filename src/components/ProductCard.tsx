@@ -1,7 +1,16 @@
+import { setSelectedProduct } from "@/redux/features/product/ProductSlice";
 import { TProduct } from "@/types/Product";
 import StarRating from "@/utils/StarRating";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleShowDetails = () => {
+    dispatch(setSelectedProduct(product));
+    navigate(`/product/${product._id}`);
+  };
   return (
     <div className="md:w-[440px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transition transform hover:-translate-y-0.5 hover:scale-102 hover:shadow-lg">
       <div>
@@ -42,7 +51,10 @@ const ProductCard = ({ product }: { product: TProduct }) => {
           </p>
         </div>
         <StarRating rating={product.rating} />
-        <button className="mt-4 bg-[#BBBAF8] px-6 py-2 rounded transition-colors hover:bg-[#9c9af6]">
+        <button
+          onClick={handleShowDetails}
+          className="mt-4 bg-[#BBBAF8] px-6 py-2 rounded transition-colors hover:bg-[#9c9af6]"
+        >
           See Details
         </button>
       </div>

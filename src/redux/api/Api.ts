@@ -13,13 +13,13 @@ export const baseApi = createApi({
       }),
     }),
     getAllProducts: builder.query({
-      query: (searchTerm = "") => ({
-        method: "GET",
-        url: "/all-products",
-        params: {
-          searchTerm,
-        },
-      }),
+      query: ({ searchTerm = "", minPrice, maxPrice, sortOrder }) => {
+        let query = `/all-products?searchTerm=${searchTerm}`;
+        if (minPrice) query += `&minPrice=${minPrice}`;
+        if (maxPrice) query += `&maxPrice=${maxPrice}`;
+        if (sortOrder) query += `&sortOrder=${sortOrder}`;
+        return query;
+      },
     }),
   }),
 });

@@ -5,7 +5,15 @@ import { useState } from "react";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { data, isLoading } = useGetAllProductsQuery(searchTerm);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const { data, isLoading } = useGetAllProductsQuery({
+    searchTerm,
+    minPrice,
+    maxPrice,
+    sortOrder,
+  });
   if (isLoading) {
     return (
       <div role="status" className="flex justify-center items-center">
@@ -37,39 +45,81 @@ const Products = () => {
   );
 
   return (
-    <div className="my-20 mx-2">
-      <div className="flex justify-between items-center mb-5 md:mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold ">Our All Products</h2>
-        <div className="w-32 md:w-64">
-          <button className="relative w-full md:w-auto block">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none rounded">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
+    <div className="my-5 md:my-12 mx-2">
+      <div className="md:flex justify-between items-center mb-5 md:mb-12">
+        <div className="md:w-full md:flex md:items-center">
+          <div className="md:w-1/2">
+            <button className="relative w-full md:w-2/3 block">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none rounded">
+                <svg
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="search-navbar"
+                className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search Products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </button>
+          </div>
+          <div className="md:w-1/2 flex justify-between items-center">
             <input
-              type="text"
-              id="search-navbar"
-              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Products..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              type="number"
+              className="block w-24 p-2 text-sm border rounded-lg my-2 md:my-0"
+              placeholder="Min Price"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
             />
-          </button>
+
+            <input
+              type="number"
+              className="block w-24 p-2 text-sm border rounded-lg"
+              placeholder="Max Price"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+            <select
+              className="block w-32 p-2 text-sm border rounded-lg my-2 md:my-0"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="">Sort By</option>
+              <option value="low-to-high">Price: Low to High</option>
+              <option value="high-to-low">Price: High to Low</option>
+            </select>
+
+            <button
+              className="p-2 text-sm bg-red-500 text-white rounded"
+              onClick={() => {
+                setSearchTerm("");
+                setMinPrice("");
+                setMaxPrice("");
+                setSortOrder("");
+              }}
+            >
+              Clear Filters
+            </button>
+          </div>
         </div>
       </div>
+      <h2 className="text-2xl md:text-4xl font-bold mb-5 md:mb-12">
+        Our All Products
+      </h2>
       {filteredProducts && filteredProducts.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
           {filteredProducts.map((product: TProduct) => (
