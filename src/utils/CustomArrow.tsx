@@ -3,7 +3,7 @@ export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full cursor-pointer z-10"
+      className="absolute top-60 md:top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full cursor-pointer z-10"
       onClick={onClick}
     >
       <svg
@@ -29,7 +29,7 @@ export const CustomNextArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full cursor-pointer z-10"
+      className="absolute top-60 md:top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full cursor-pointer z-10"
       onClick={onClick}
     >
       <svg

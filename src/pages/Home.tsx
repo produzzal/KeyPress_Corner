@@ -6,12 +6,14 @@ import CustomerReview from "@/components/ui/CustomerReview";
 
 const Home = () => {
   return (
-    <div className="mx-2">
+    <div>
       <Header />
-      <Service />
-      <FeaturedProduct />
-      <BrandShowcase />
-      <CustomerReview />
+      <div className="mx-2">
+        <Service />
+        <FeaturedProduct />
+        <BrandShowcase />
+        <CustomerReview />
+      </div>
     </div>
   );
 };

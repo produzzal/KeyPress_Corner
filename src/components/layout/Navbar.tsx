@@ -12,14 +12,11 @@ const Navbar = () => {
     <div>
       <nav className="bg-[#262626] dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
+          <button className="flex items-center space-x-3 rtl:space-x-reverse">
             <span className="self-center text-white font-bold md:text-3xl text-xl mr-5  whitespace-nowrap dark:text-white">
               KeyPress Corner
             </span>
-          </a>
+          </button>
           <div className="flex flex-1 items-center justify-end space-x-3 rtl:space-x-reverse md:order-2">
             {/* cart  */}
             <button
